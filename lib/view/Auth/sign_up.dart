@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pharmacy/main.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -7,7 +8,6 @@ import '../../Data/models/user.dart';
 import '../../controllers/controller_state.dart';
 import '../../controllers/user_controller.dart';
 import '../core/core.dart';
-import '../home_page.dart';
 import './login.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -168,7 +168,7 @@ class _SignUpPageState extends State<SignUpPage> {
     });
   }
 
-  void signUp() {
+  Future<void> signUp() async {
     if (_formKey.currentState!.validate()) {
       try {
         final newUser = UserModel(
@@ -177,10 +177,10 @@ class _SignUpPageState extends State<SignUpPage> {
             email: _emailController.text,
             education: _educationController.text,
             phoneNo: _phoneNoController.text);
-        usercontroller.signUp(_passwordController.text, newUser);
+        await usercontroller.signUp(_passwordController.text, newUser);
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (BuildContext context) {
-          return HomePage();
+          return Pharmacy();
         }));
       } catch (e) {
         showTopSnackBar(

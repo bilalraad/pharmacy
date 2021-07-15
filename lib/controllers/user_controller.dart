@@ -83,8 +83,8 @@ class UserContoller extends GetxController {
     _updateControllerState(ControllerState.loading);
 
     try {
-      await _userRepository.signOut();
       _updateState(AuthState.notAuthenticated);
+      await _userRepository.signOut();
       _updateControllerState(ControllerState.loaded);
     } catch (e) {
       _updateControllerState(ControllerState.loaded);

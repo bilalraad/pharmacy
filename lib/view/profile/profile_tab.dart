@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharmacy/main.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -57,9 +58,13 @@ class _ProfileTabState extends State<ProfileTab> {
             PrimaryButton(
               backroundColor: AppColors.kPrimaryLightColor,
               textColor: AppColors.black,
-              onPressed: () {
+              onPressed: () async {
                 try {
                   _userController.signOut();
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return Pharmacy();
+                  }));
                 } catch (e) {
                   showTopSnackBar(
                     context,

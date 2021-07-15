@@ -1,17 +1,21 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:pharmacy/Data/medicine_repo.dart';
+import 'package:pharmacy/view/core/app_colors.dart';
 
 import './view/app_startup.dart';
 import './controllers/user_controller.dart';
 import './view/Auth/login.dart';
-import 'view/home_page.dart';
+import './view/home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: AppColors.kPrimaryColor));
   await Firebase.initializeApp();
-  await MedicineRepo.uploadMedicines();
+  //to upload fake data for testings
+  // await MedicineRepo.uploadMedicines();
   Get.put<UserContoller>(UserContoller());
 
   runApp(MyApp());
